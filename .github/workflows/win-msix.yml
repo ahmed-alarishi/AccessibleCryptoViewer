@@ -1,0 +1,31 @@
+name: Windows MSIX Build
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: "8.x"
+    - name: Restore
+      run: dotnet restore
+    - name: Publish
+      run: dotnet publish -c Release -r win10-x64 --self-contained -p:PublishSingleFile=true
+    - name: Pack MSIX
+      shell: pwsh
+      run: |
+        choco install --yes msix-packaging
+        $exe = Get-ChildItem -Recurse -Filter *.exe | Where-Object FullName -match "publish" | Select-Object -First 1
+        msix pack /d $exe.Directory.FullName /p $Env:GITHUB_WORKSPACE\CryptoAccessible-M0.msix /v /f
+    - name: Upload installer
+      uses: actions/upload-artifact@v4
+      with:
+        name: CryptoAccessible-M0-installer
+        path: CryptoAccessible-M0.msix
