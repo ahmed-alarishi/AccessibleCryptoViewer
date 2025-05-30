@@ -20,15 +20,20 @@ jobs:
     - name: Restore
       run: dotnet restore
 
-    # Install WinUI / Windows workload so XAML compiler is available
-    - name: Install WinUI workload
-      run: dotnet workload install windows
+    # Publish and capture MSBuild binary log
+    - name: Publish and capture binlog
+      run: dotnet publish -c Release -r win-x64 /bl
 
-    # Framework-dependent publish
-    - name: Publish
-      run: dotnet publish -c Release -r win-x64
+    # Upload the msbuild.binlog regardless of success/failure
+    - name: Upload build log
+      uses: actions/upload-artifact@v4
+      with:
+        name: msbuild-binlog
+        path: msbuild.binlog
 
+    # Try to package MSIX (will be skipped if publish failed)
     - name: Pack MSIX
+      if: success()    # only runs if Publish succeeded
       shell: pwsh
       run: |
         choco install --yes msix-packaging
@@ -36,6 +41,7 @@ jobs:
         msix pack /d $publish.Directory.FullName /p $Env:GITHUB_WORKSPACE\CryptoAccessible-M0.msix /v /f
 
     - name: Upload installer
+      if: success()
       uses: actions/upload-artifact@v4
       with:
         name: CryptoAccessible-M0-installer
