@@ -2,8 +2,8 @@ name: Windows MSIX Build
 
 on:
   push:
-    branches: [ "main" ]   # build every time you push to main
-  workflow_dispatch:        # …and also allow manual runs
+    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -20,19 +20,17 @@ jobs:
     - name: Restore
       run: dotnet restore
 
-    # ── Compile a self-contained Release build ──
+    # Framework-dependent publish (no self-contained flags)
     - name: Publish
-      run: dotnet publish -c Release -r win-x64 --self-contained -p:PublishSingleFile=true
+      run: dotnet publish -c Release -r win-x64
 
-    # ── Package the EXE into an MSIX ──
     - name: Pack MSIX
       shell: pwsh
       run: |
         choco install --yes msix-packaging
-        $exe = Get-ChildItem -Recurse -Filter *.exe | Where-Object FullName -match "publish" | Select-Object -First 1
-        msix pack /d $exe.Directory.FullName /p $Env:GITHUB_WORKSPACE\CryptoAccessible-M0.msix /v /f
+        $publish = Get-ChildItem -Recurse -Filter *.exe | Where-Object FullName -match "publish" | Select-Object -First 1
+        msix pack /d $publish.Directory.FullName /p $Env:GITHUB_WORKSPACE\CryptoAccessible-M0.msix /v /f
 
-    # ── Upload the installer as a build artifact ──
     - name: Upload installer
       uses: actions/upload-artifact@v4
       with:
