@@ -20,7 +20,11 @@ jobs:
     - name: Restore
       run: dotnet restore
 
-    # Framework-dependent publish (no self-contained flags)
+    # Install WinUI / Windows workload so XAML compiler is available
+    - name: Install WinUI workload
+      run: dotnet workload install windows
+
+    # Framework-dependent publish
     - name: Publish
       run: dotnet publish -c Release -r win-x64
 
