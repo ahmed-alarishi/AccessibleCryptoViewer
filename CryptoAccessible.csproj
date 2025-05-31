@@ -10,15 +10,13 @@
     <!-- Modern C# features -->
     <Nullable>enable</Nullable>
 
-    <!-- WinUI & MSIX support -->
+    <!-- WinUI tooling -->
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
-    <WindowsPackageType>MSIX</WindowsPackageType>
 
-    <!-- Default namespace -->
     <RootNamespace>CryptoAccessible</RootNamespace>
 
-    <!-- Framework‑dependent runtime identifiers -->
+    <!-- Supported RIDs -->
     <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
   </PropertyGroup>
 
