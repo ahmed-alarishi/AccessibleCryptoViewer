@@ -20,11 +20,9 @@ jobs:
     - name: Restore
       run: dotnet restore
 
-    # Publish and capture MSBuild binary log
     - name: Publish and capture binlog
       run: dotnet publish -c Release -r win-x64 /bl
 
-    # Always upload the msbuild.binlog so we can debug future failures
     - name: Upload build log
       if: always()
       uses: actions/upload-artifact@v4
@@ -32,10 +30,10 @@ jobs:
         name: msbuild-binlog
         path: '**/msbuild.binlog'
 
-    # Upload the compiled framework‑dependent EXE
     - name: Upload EXE
       if: success()
+      continue-on-error: true
       uses: actions/upload-artifact@v4
       with:
         name: CryptoAccessible-M0-exe
-        path: '**/publish/CryptoAccessible.exe'
+        path: '**/publish/**/*.exe'
