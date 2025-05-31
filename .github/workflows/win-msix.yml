@@ -20,20 +20,19 @@ jobs:
     - name: Restore
       run: dotnet restore
 
-    # Publish and capture MSBuild binary log
     - name: Publish and capture binlog
       run: dotnet publish -c Release -r win-x64 /bl
 
-    # Upload the msbuild.binlog regardless of success/failure
+    # Upload msbuild.binlog from any subfolder even if build failed
     - name: Upload build log
+      if: always()
       uses: actions/upload-artifact@v4
       with:
         name: msbuild-binlog
-        path: msbuild.binlog
+        path: '**/msbuild.binlog'
 
-    # Try to package MSIX (will be skipped if publish failed)
     - name: Pack MSIX
-      if: success()    # only runs if Publish succeeded
+      if: success()
       shell: pwsh
       run: |
         choco install --yes msix-packaging
