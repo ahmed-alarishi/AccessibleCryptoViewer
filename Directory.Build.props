@@ -1,9 +1,9 @@
 <Project>
   <PropertyGroup>
-    <!-- Force managed, in‑process XAML compiler for full diagnostics -->
+    <!-- Force managed in‑process XAML compiler -->
     <UseXamlCompilerExecutable>false</UseXamlCompilerExecutable>
 
-    <!-- Skip MSIX/PRI generation for unpackaged app -->
+    <!-- Disable MSIX/PRI tasks for unpackaged app -->
     <EnableMsixTooling>false</EnableMsixTooling>
     <AppxGeneratePriEnabled>false</AppxGeneratePriEnabled>
   </PropertyGroup>
