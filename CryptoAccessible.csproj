@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <!-- WinUI 3 desktop app, framework-dependent, unpackaged -->
+  <!-- WinUI 3 desktop app, framework‑dependent, unpackaged -->
   <PropertyGroup>
     <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
     <OutputType>WinExe</OutputType>
@@ -8,7 +8,6 @@
     <!-- WinUI tooling -->
     <UseWinUI>true</UseWinUI>
     <WindowsPackageType>None</WindowsPackageType>
-    <EnableMsixTooling>true</EnableMsixTooling>
 
     <RootNamespace>CryptoAccessible</RootNamespace>
     <Nullable>enable</Nullable>
@@ -18,10 +17,5 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.3" />
   </ItemGroup>
-
-  <!-- === Force the managed XAML compiler so we get full diagnostics === -->
-  <PropertyGroup>
-    <UseXamlCompilerExecutable>false</UseXamlCompilerExecutable>
-  </PropertyGroup>
 
 </Project>
