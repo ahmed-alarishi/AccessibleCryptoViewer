@@ -1,15 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <!-- Framework‑dependent WinUI 3 desktop app -->
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
+
+    <!-- .NET 8 + Win10 20H2 (19041) or newer -->
     <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+
+    <!-- Modern C# features -->
     <Nullable>enable</Nullable>
 
-    <!-- WinUI tooling + MSIX support -->
+    <!-- WinUI & MSIX support -->
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
+    <WindowsPackageType>MSIX</WindowsPackageType>
 
+    <!-- Default namespace -->
     <RootNamespace>CryptoAccessible</RootNamespace>
+
+    <!-- Framework‑dependent runtime identifiers -->
     <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
   </PropertyGroup>
 
