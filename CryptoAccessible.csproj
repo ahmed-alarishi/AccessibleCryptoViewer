@@ -1,22 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <!-- Framework‑dependent WinUI 3 desktop app -->
+  <!-- Framework‑dependent, unpackaged WinUI 3 desktop app -->
   <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
     <OutputType>WinExe</OutputType>
 
-    <!-- .NET 8 + Win10 20H2 (19041) or newer -->
-    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
-
-    <!-- Modern C# features -->
-    <Nullable>enable</Nullable>
-
-    <!-- WinUI tooling -->
+    <!-- Enable WinUI tooling but declare this as *un‑packaged* -->
     <UseWinUI>true</UseWinUI>
+    <WindowsPackageType>None</WindowsPackageType>
     <EnableMsixTooling>true</EnableMsixTooling>
 
-    <RootNamespace>CryptoAccessible</RootNamespace>
+    <!-- No single‑file / self‑contained flags -->
+    <SelfContained>false</SelfContained>
+    <PublishSingleFile>false</PublishSingleFile>
 
-    <!-- Supported RIDs -->
+    <RootNamespace>CryptoAccessible</RootNamespace>
+    <Nullable>enable</Nullable>
+
+    <!-- Supported runtime identifiers -->
     <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
   </PropertyGroup>
 
