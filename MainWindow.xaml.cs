@@ -1,14 +1,23 @@
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
+﻿using System.Windows;
+using System.Windows.Controls; // Required for ComboBox, CheckBox etc. if you were to interact in code-behind
 
-namespace CryptoAccessible
+namespace AccessibleCryptoViewer// Ensure this namespace matches your project's name
 {
-    public sealed partial class MainWindow : Window
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
     {
         public MainWindow()
         {
-            this.InitializeComponent();
-            ContentFrame.Navigate(typeof(Views.DashboardPage));
+            InitializeComponent();
+
+            // You could set default selections for ComboBoxes here if needed, for example:
+            // RefreshRateComboBox.SelectedIndex = 1; // Selects "30 seconds"
+            // DescriptionStyleComboBox.SelectedIndex = 0; // Selects "Verbose"
         }
+
+        // We will add event handlers and other logic here in later stages.
+        // For example, what happens when a button is clicked or a setting is changed.
     }
 }

@@ -1,18 +1,78 @@
-<Window
-    x:Class="CryptoAccessible.MainWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:muxc="http://schemas.microsoft.com/winui/2006/xaml/presentation"
-    Title="CryptoAccessible"
-    Height="600" Width="900">
-    <muxc:NavigationView x:Name="RootNav" PaneDisplayMode="Left" IsBackButtonVisible="Collapsed">
-        <muxc:NavigationView.MenuItems>
-            <muxc:NavigationViewItem Content="Dashboard" Tag="dashboard" />
-            <muxc:NavigationViewItem Content="Watchlist" Tag="watchlist" />
-            <muxc:NavigationViewItem Content="Movers" Tag="movers" />
-            <muxc:NavigationViewItem Content="News & Alerts" Tag="news" />
-            <muxc:NavigationViewItem Content="Settings" Tag="settings" />
-        </muxc:NavigationView.MenuItems>
-        <Frame x:Name="ContentFrame" />
-    </muxc:NavigationView>
+﻿<Window x:Class="AccessibleCryptoViewer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AccessibleCryptoViewer"
+        mc:Ignorable="d"
+        Title="Accessible Crypto Information Display" Height="600" Width="800">
+    <Grid>
+        <TabControl x:Name="MainTabControl" AutomationProperties.Name="Main application sections">
+            <TabItem Header="Watchlist" AutomationProperties.Name="Watchlist Tab">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/> <RowDefinition Height="*"/>    <RowDefinition Height="Auto"/> </Grid.RowDefinitions>
+
+                    <Label Content="My Crypto Watchlist" Grid.Row="0" FontSize="16" FontWeight="Bold" AutomationProperties.HeadingLevel="Level1"/>
+
+                    <ListBox x:Name="WatchlistCryptoListBox" Grid.Row="1" Margin="0,5,0,5"
+                             AutomationProperties.Name="List of cryptocurrencies in watchlist">
+                        <ListBoxItem Content="Bitcoin (BTC) - $65,000 - +1.5%" AutomationProperties.Name="Bitcoin (BTC) - $65,000 - +1.5%"/>
+                        <ListBoxItem Content="Ethereum (ETH) - $3,500 - -0.5%" AutomationProperties.Name="Ethereum (ETH) - $3,500 - -0.5%"/>
+                        <ListBoxItem Content="Solana (SOL) - $150 - +3.0%" AutomationProperties.Name="Solana (SOL) - $150 - +3.0%"/>
+                        <ListBoxItem Content="Cardano (ADA) - $0.45 - +0.2%" AutomationProperties.Name="Cardano (ADA) - $0.45 - +0.2%"/>
+                        <ListBoxItem Content="XRP (XRP) - $0.52 - -1.0%" AutomationProperties.Name="XRP (XRP) - $0.52 - -1.0%"/>
+                    </ListBox>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button x:Name="ViewDetailsButton" Content="View Details" Margin="5" Padding="10,5" AutomationProperties.Name="View detailed information for selected cryptocurrency"/>
+                        <Button x:Name="RefreshListButton" Content="Refresh List" Margin="5" Padding="10,5" AutomationProperties.Name="Refresh the watchlist"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Top Performers" AutomationProperties.Name="Top Performers Tab">
+                <Grid Margin="10">
+                    <TextBlock Text="Top Performers Content (Placeholder)" HorizontalAlignment="Center" VerticalAlignment="Center" AutomationProperties.Name="Content area for Top Performers"/>
+                    </Grid>
+            </TabItem>
+
+            <TabItem Header="Solana Ecosystem" AutomationProperties.Name="Solana Ecosystem Tab">
+                 <Grid Margin="10">
+                    <TextBlock Text="Solana Ecosystem Content (Placeholder)" HorizontalAlignment="Center" VerticalAlignment="Center" AutomationProperties.Name="Content area for Solana Ecosystem"/>
+                    </Grid>
+            </TabItem>
+
+            <TabItem Header="Crypto News" AutomationProperties.Name="Crypto News Tab">
+                <Grid Margin="10">
+                    <TextBlock Text="News Content (Placeholder)" HorizontalAlignment="Center" VerticalAlignment="Center" AutomationProperties.Name="Content area for Crypto News"/>
+                    </Grid>
+            </TabItem>
+
+            <TabItem Header="Settings" AutomationProperties.Name="Application Settings Tab">
+                <StackPanel Margin="20" Orientation="Vertical">
+                    <TextBlock Text="Application Settings" FontSize="16" FontWeight="Bold" AutomationProperties.HeadingLevel="Level1" Margin="0,0,0,15"/>
+
+                    <CheckBox x:Name="ThemeCheckBox" Content="Use Dark Mode" Margin="0,5,0,10" AutomationProperties.Name="Toggle between light and dark theme"/>
+                    
+                    <Label Content="Data Refresh Rate:" Target="{Binding ElementName=RefreshRateComboBox}"/>
+                    <ComboBox x:Name="RefreshRateComboBox" Margin="0,0,0,10" AutomationProperties.Name="Select data refresh interval">
+                        <ComboBoxItem Content="15 seconds" AutomationProperties.Name="15 seconds refresh interval"/>
+                        <ComboBoxItem Content="30 seconds" AutomationProperties.Name="30 seconds refresh interval"/>
+                        <ComboBoxItem Content="1 minute" AutomationProperties.Name="1 minute refresh interval"/>
+                        <ComboBoxItem Content="Manual Only" AutomationProperties.Name="Manual refresh only"/>
+                    </ComboBox>
+
+                    <Label Content="Description Style:" Target="{Binding ElementName=DescriptionStyleComboBox}"/>
+                    <ComboBox x:Name="DescriptionStyleComboBox" Margin="0,0,0,10" AutomationProperties.Name="Select preferred description style for crypto details">
+                        <ComboBoxItem Content="Verbose" AutomationProperties.Name="Verbose description style"/>
+                        <ComboBoxItem Content="Concise" AutomationProperties.Name="Concise description style"/>
+                        <ComboBoxItem Content="Numerical" AutomationProperties.Name="Numerical description style"/>
+                    </ComboBox>
+
+                    <CheckBox x:Name="BeepOnUpdateCheckBox" Content="Beep on data update" Margin="0,5,0,10" AutomationProperties.Name="Enable or disable sound notification on data refresh"/>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
 </Window>
