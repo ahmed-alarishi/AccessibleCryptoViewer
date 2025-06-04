@@ -13,3 +13,56 @@
 [2025-06-03 15:02:58] Refresh rate changed to: 30s
 [2025-06-03 15:02:59] Refresh rate changed to: 60s
 [2025-06-03 15:02:59] Refresh rate changed to: 30s
+[2025-06-04 07:45:26] Debug: LoadAndSetInitialSettings called.
+[2025-06-04 07:45:26] Debug: Window_Loaded event fired
+[2025-06-04 07:45:26] Debug: LoadWatchlistDataAsync started.
+[2025-06-04 07:45:27] Debug: Watchlist loaded with 6 items.
+[2025-06-04 08:46:39] Debug: LoadAndSetInitialSettings called.
+[2025-06-04 08:46:39] Debug: Window_Loaded event fired
+[2025-06-04 08:46:39] Debug: LoadWatchlistDataAsync started.
+[2025-06-04 08:46:40] Debug: Watchlist loaded with 6 items.
+[2025-06-04 08:47:27] Debug: RefreshListButton_Click event fired
+[2025-06-04 08:47:27] Debug: LoadWatchlistDataAsync started.
+[2025-06-04 08:47:27] Debug: Watchlist loaded with 6 items.
+[2025-06-04 08:47:55] Theme changed to: Light
+[2025-06-04 08:47:56] Theme changed to: Dark
+[2025-06-04 08:47:58] Refresh rate changed to: 60s
+[2025-06-04 08:47:59] Refresh rate changed to: 30s
+[2025-06-04 08:47:59] Refresh rate changed to: 20s
+[2025-06-04 08:47:59] Refresh rate changed to: 15s
+[2025-06-04 08:48:00] Refresh rate changed to: 20s
+[2025-06-04 08:48:04] Description style changed to: Verbose
+[2025-06-04 08:57:43] Debug: LoadAndSetInitialSettings called.
+[2025-06-04 08:57:43] Debug: Window_Loaded event fired
+[2025-06-04 08:57:43] Debug: LoadWatchlistDataAsync started.
+[2025-06-04 08:57:44] Debug: Watchlist loaded with 6 items.
+[2025-06-04 08:58:27] Refresh rate changed to: 15s
+[2025-06-04 08:59:09] Description style changed to: Concise
+[2025-06-04 08:59:09] Description style changed to: Verbose
+[2025-06-04 08:59:10] Description style changed to: Concise
+[2025-06-04 08:59:10] Description style changed to: Numerical
+[2025-06-04 08:59:31] Debug: RefreshListButton_Click event fired
+[2025-06-04 08:59:31] Debug: LoadWatchlistDataAsync started.
+[2025-06-04 08:59:32] Debug: Watchlist loaded with 6 items.
+[2025-06-04 08:59:40] Debug: RefreshListButton_Click event fired
+[2025-06-04 08:59:40] Debug: LoadWatchlistDataAsync started.
+[2025-06-04 08:59:40] Debug: Watchlist loaded with 6 items.
+[2025-06-04 08:59:57] Debug: RefreshListButton_Click event fired
+[2025-06-04 08:59:57] Debug: LoadWatchlistDataAsync started.
+[2025-06-04 08:59:58] Debug: Watchlist loaded with 6 items.
+[2025-06-04 09:00:24] Description style changed to: Concise
+[2025-06-04 09:00:25] Description style changed to: Verbose
+[2025-06-04 09:00:26] Description style changed to: Concise
+[2025-06-04 09:00:26] Description style changed to: Verbose
+[2025-06-04 09:00:35] Debug: RefreshListButton_Click event fired
+[2025-06-04 09:00:35] Debug: LoadWatchlistDataAsync started.
+[2025-06-04 09:00:35] Debug: Watchlist loaded with 6 items.
+[2025-06-04 09:01:06] Debug: RefreshListButton_Click event fired
+[2025-06-04 09:01:06] Debug: LoadWatchlistDataAsync started.
+[2025-06-04 09:01:06] Debug: Watchlist loaded with 6 items.
+[2025-06-04 09:01:14] Debug: RefreshListButton_Click event fired
+[2025-06-04 09:01:14] Debug: LoadWatchlistDataAsync started.
+[2025-06-04 09:01:14] Debug: Watchlist loaded with 6 items.
+[2025-06-04 09:01:43] Debug: RefreshListButton_Click event fired
+[2025-06-04 09:01:43] Debug: LoadWatchlistDataAsync started.
+[2025-06-04 09:01:43] Debug: Watchlist loaded with 6 items.
