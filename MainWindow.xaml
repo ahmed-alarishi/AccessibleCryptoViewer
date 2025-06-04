@@ -5,72 +5,175 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AccessibleCryptoViewer"
         mc:Ignorable="d"
-        Title="Accessible Crypto Information Display" Height="600" Width="800">
-    <Grid>
-        <TabControl x:Name="MainTabControl" AutomationProperties.Name="Main application sections">
-            <TabItem Header="Watchlist" AutomationProperties.Name="Watchlist Tab">
-                <Grid Margin="10">
+        Title="Accessible Crypto Information Display" Height="600" Width="800"
+        FontSize="{DynamicResource AppBaseFontSize}" 
+        Background="{DynamicResource AppBackgroundBrush}"
+        Foreground="{DynamicResource AppForegroundBrush}"
+        Loaded="Window_Loaded"> <Grid>
+        <TabControl x:Name="MainTabControl" AutomationProperties.Name="Main application sections"
+                    Background="{DynamicResource AppBackgroundBrush}"
+                    Foreground="{DynamicResource AppForegroundBrush}">
+            <TabItem Header="Watchlist" AutomationProperties.Name="Watchlist Tab"
+                     Background="{DynamicResource AppBackgroundBrush}" 
+                     Foreground="{DynamicResource AppForegroundBrush}">
+                <Grid Margin="10" Background="{DynamicResource AppBackgroundBrush}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/> <RowDefinition Height="*"/>    <RowDefinition Height="Auto"/> </Grid.RowDefinitions>
 
-                    <Label Content="My Crypto Watchlist" Grid.Row="0" FontSize="16" FontWeight="Bold" AutomationProperties.HeadingLevel="Level1"/>
+                    <Label Content="My Crypto Watchlist" Grid.Row="0" FontSize="16" FontWeight="Bold" 
+                           AutomationProperties.HeadingLevel="Level1"
+                           Foreground="{DynamicResource AppForegroundBrush}"/>
 
                     <ListBox x:Name="WatchlistCryptoListBox" Grid.Row="1" Margin="0,5,0,5"
-                             AutomationProperties.Name="List of cryptocurrencies in watchlist">
-                        <ListBoxItem Content="Bitcoin (BTC) - $65,000 - +1.5%" AutomationProperties.Name="Bitcoin (BTC) - $65,000 - +1.5%"/>
-                        <ListBoxItem Content="Ethereum (ETH) - $3,500 - -0.5%" AutomationProperties.Name="Ethereum (ETH) - $3,500 - -0.5%"/>
-                        <ListBoxItem Content="Solana (SOL) - $150 - +3.0%" AutomationProperties.Name="Solana (SOL) - $150 - +3.0%"/>
-                        <ListBoxItem Content="Cardano (ADA) - $0.45 - +0.2%" AutomationProperties.Name="Cardano (ADA) - $0.45 - +0.2%"/>
-                        <ListBoxItem Content="XRP (XRP) - $0.52 - -1.0%" AutomationProperties.Name="XRP (XRP) - $0.52 - -1.0%"/>
+                             AutomationProperties.Name="List of cryptocurrencies in watchlist"
+                             Background="{DynamicResource ListBoxBackgroundBrush}"
+                             Foreground="{DynamicResource ListBoxItemForegroundBrush}"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="{DynamicResource AppForegroundBrush}" BorderThickness="0,0,0,1" Padding="5" Margin="2" MinWidth="300">
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="14" Margin="0,0,5,0"
+                                                       AutomationProperties.Name="{Binding Name, StringFormat='Cryptocurrency name: {0}'}"
+                                                       Foreground="{DynamicResource AppForegroundBrush}"/>
+                                            <TextBlock Text="{Binding Symbol, StringFormat='({0})'}" Margin="0,0,10,0"
+                                                       AutomationProperties.Name="{Binding Symbol, StringFormat='Symbol: {0}'}"
+                                                       Foreground="{DynamicResource AppForegroundBrush}"/>
+                                        </StackPanel>
+                                        <TextBlock Margin="0,2,0,0"> <Run Text="Price: " Foreground="{DynamicResource AppForegroundBrush}"/>
+                                            <Run Text="{Binding PriceUsd, StringFormat={}{0:C}, FallbackValue='N/A'}" FontWeight="SemiBold" Foreground="{DynamicResource AppForegroundBrush}"/>
+                                            <Run Text=" | 24h: " Foreground="{DynamicResource AppForegroundBrush}"/>
+                                            <Run Text="{Binding PriceChangePercentage24h, StringFormat={}{0:F2}%, FallbackValue='N/A'}" Foreground="{DynamicResource AppForegroundBrush}"/>
+                                        </TextBlock>
+                                        <AutomationProperties.Name>
+                                            <MultiBinding StringFormat="{}{0} ({1}), Price: {2:C}, 24 hour change: {3:F2}%">
+                                                <Binding Path="Name"/>
+                                                <Binding Path="Symbol"/>
+                                                <Binding Path="PriceUsd" FallbackValue="Not Available"/>
+                                                <Binding Path="PriceChangePercentage24h" FallbackValue="Not Available"/>
+                                            </MultiBinding>
+                                        </AutomationProperties.Name>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
                     </ListBox>
 
                     <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button x:Name="ViewDetailsButton" Content="View Details" Margin="5" Padding="10,5" AutomationProperties.Name="View detailed information for selected cryptocurrency"/>
-                        <Button x:Name="RefreshListButton" Content="Refresh List" Margin="5" Padding="10,5" AutomationProperties.Name="Refresh the watchlist"/>
+                        <Button x:Name="ViewDetailsButton" Content="View Details" Margin="5" Padding="10,5" 
+                                AutomationProperties.Name="View detailed information for selected cryptocurrency"
+                                Background="{DynamicResource ButtonBackgroundBrush}"
+                                Foreground="{DynamicResource ButtonForegroundBrush}"/>
+                        <Button x:Name="RefreshListButton" Content="Refresh List" Margin="5" Padding="10,5" 
+                                AutomationProperties.Name="Refresh the watchlist"
+                                Click="RefreshListButton_Click" Background="{DynamicResource ButtonBackgroundBrush}"
+                                Foreground="{DynamicResource ButtonForegroundBrush}"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Top Performers" AutomationProperties.Name="Top Performers Tab">
-                <Grid Margin="10">
-                    <TextBlock Text="Top Performers Content (Placeholder)" HorizontalAlignment="Center" VerticalAlignment="Center" AutomationProperties.Name="Content area for Top Performers"/>
-                    </Grid>
+            <TabItem Header="Top Performers" AutomationProperties.Name="Top Performers Tab"
+                     Background="{DynamicResource AppBackgroundBrush}" 
+                     Foreground="{DynamicResource AppForegroundBrush}">
+                <Grid Margin="10" Background="{DynamicResource AppBackgroundBrush}">
+                    <TextBlock Text="Top Performers Content (Placeholder)" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                               AutomationProperties.Name="Content area for Top Performers"
+                               Foreground="{DynamicResource AppForegroundBrush}"/>
+                </Grid>
             </TabItem>
 
-            <TabItem Header="Solana Ecosystem" AutomationProperties.Name="Solana Ecosystem Tab">
-                 <Grid Margin="10">
-                    <TextBlock Text="Solana Ecosystem Content (Placeholder)" HorizontalAlignment="Center" VerticalAlignment="Center" AutomationProperties.Name="Content area for Solana Ecosystem"/>
-                    </Grid>
+            <TabItem Header="Solana Ecosystem" AutomationProperties.Name="Solana Ecosystem Tab"
+                     Background="{DynamicResource AppBackgroundBrush}" 
+                     Foreground="{DynamicResource AppForegroundBrush}">
+                 <Grid Margin="10" Background="{DynamicResource AppBackgroundBrush}">
+                    <TextBlock Text="Solana Ecosystem Content (Placeholder - Coming Later)" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                               AutomationProperties.Name="Content area for Solana Ecosystem"
+                               Foreground="{DynamicResource AppForegroundBrush}"/>
+                </Grid>
             </TabItem>
 
-            <TabItem Header="Crypto News" AutomationProperties.Name="Crypto News Tab">
-                <Grid Margin="10">
-                    <TextBlock Text="News Content (Placeholder)" HorizontalAlignment="Center" VerticalAlignment="Center" AutomationProperties.Name="Content area for Crypto News"/>
-                    </Grid>
+            <TabItem Header="Crypto News" AutomationProperties.Name="Crypto News Tab"
+                     Background="{DynamicResource AppBackgroundBrush}" 
+                     Foreground="{DynamicResource AppForegroundBrush}">
+                <Grid Margin="10" Background="{DynamicResource AppBackgroundBrush}">
+                    <TextBlock Text="News Content (Placeholder)" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                               AutomationProperties.Name="Content area for Crypto News"
+                               Foreground="{DynamicResource AppForegroundBrush}"/>
+                </Grid>
             </TabItem>
 
-            <TabItem Header="Settings" AutomationProperties.Name="Application Settings Tab">
-                <StackPanel Margin="20" Orientation="Vertical">
-                    <TextBlock Text="Application Settings" FontSize="16" FontWeight="Bold" AutomationProperties.HeadingLevel="Level1" Margin="0,0,0,15"/>
+            <TabItem Header="Settings" AutomationProperties.Name="Application Settings Tab"
+                     Background="{DynamicResource AppBackgroundBrush}" 
+                     Foreground="{DynamicResource AppForegroundBrush}">
+                <StackPanel Margin="20" Orientation="Vertical" Background="{DynamicResource AppBackgroundBrush}">
+                    <TextBlock Text="Application Settings" FontSize="16" FontWeight="Bold" 
+                               AutomationProperties.HeadingLevel="Level1" Margin="0,0,0,15"
+                               Foreground="{DynamicResource AppForegroundBrush}"/>
 
-                    <CheckBox x:Name="ThemeCheckBox" Content="Use Dark Mode" Margin="0,5,0,10" AutomationProperties.Name="Toggle between light and dark theme"/>
+                    <Label Content="Select Theme:" Target="{Binding ElementName=ThemeComboBox}"
+                           Foreground="{DynamicResource AppForegroundBrush}"/>
+                    <ComboBox x:Name="ThemeComboBox" Margin="0,0,0,10" 
+                              AutomationProperties.Name="Select application theme, light or dark"
+                              SelectionChanged="ThemeComboBox_SelectionChanged" 
+                              Background="{DynamicResource ListBoxBackgroundBrush}"
+                              Foreground="{DynamicResource ListBoxItemForegroundBrush}"/>
                     
-                    <Label Content="Data Refresh Rate:" Target="{Binding ElementName=RefreshRateComboBox}"/>
-                    <ComboBox x:Name="RefreshRateComboBox" Margin="0,0,0,10" AutomationProperties.Name="Select data refresh interval">
-                        <ComboBoxItem Content="15 seconds" AutomationProperties.Name="15 seconds refresh interval"/>
-                        <ComboBoxItem Content="30 seconds" AutomationProperties.Name="30 seconds refresh interval"/>
-                        <ComboBoxItem Content="1 minute" AutomationProperties.Name="1 minute refresh interval"/>
-                        <ComboBoxItem Content="Manual Only" AutomationProperties.Name="Manual refresh only"/>
+                    <Label Content="Data Refresh Rate:" Target="{Binding ElementName=RefreshRateComboBox}"
+                           Foreground="{DynamicResource AppForegroundBrush}"/>
+                    <ComboBox x:Name="RefreshRateComboBox" Margin="0,0,0,10" 
+                              AutomationProperties.Name="Select data refresh interval"
+                              SelectionChanged="RefreshRateComboBox_SelectionChanged"
+                              Background="{DynamicResource ListBoxBackgroundBrush}"
+                              Foreground="{DynamicResource ListBoxItemForegroundBrush}">
+                        <ComboBoxItem Content="15 seconds" Tag="15" AutomationProperties.Name="15 seconds refresh interval" Foreground="{DynamicResource ListBoxItemForegroundBrush}"/>
+                        <ComboBoxItem Content="20 seconds" Tag="20" AutomationProperties.Name="20 seconds refresh interval" Foreground="{DynamicResource ListBoxItemForegroundBrush}"/>
+                        <ComboBoxItem Content="30 seconds" Tag="30" AutomationProperties.Name="30 seconds refresh interval" Foreground="{DynamicResource ListBoxItemForegroundBrush}"/>
+                        <ComboBoxItem Content="1 minute" Tag="60" AutomationProperties.Name="1 minute refresh interval" Foreground="{DynamicResource ListBoxItemForegroundBrush}"/>
+                        <ComboBoxItem Content="5 minutes" Tag="300" AutomationProperties.Name="5 minutes refresh interval" Foreground="{DynamicResource ListBoxItemForegroundBrush}"/>
+                        <ComboBoxItem Content="Manual Only" Tag="0" AutomationProperties.Name="Manual refresh only" Foreground="{DynamicResource ListBoxItemForegroundBrush}"/>
                     </ComboBox>
 
-                    <Label Content="Description Style:" Target="{Binding ElementName=DescriptionStyleComboBox}"/>
-                    <ComboBox x:Name="DescriptionStyleComboBox" Margin="0,0,0,10" AutomationProperties.Name="Select preferred description style for crypto details">
-                        <ComboBoxItem Content="Verbose" AutomationProperties.Name="Verbose description style"/>
-                        <ComboBoxItem Content="Concise" AutomationProperties.Name="Concise description style"/>
-                        <ComboBoxItem Content="Numerical" AutomationProperties.Name="Numerical description style"/>
-                    </ComboBox>
+                    <Label Content="Description Style:" Target="{Binding ElementName=DescriptionStyleComboBox}"
+                           Foreground="{DynamicResource AppForegroundBrush}"/>
+                    <ComboBox x:Name="DescriptionStyleComboBox" Margin="0,0,0,10" 
+                              AutomationProperties.Name="Select preferred description style for crypto details"
+                              SelectionChanged="DescriptionStyleComboBox_SelectionChanged"
+                              Background="{DynamicResource ListBoxBackgroundBrush}"
+                              Foreground="{DynamicResource ListBoxItemForegroundBrush}"/>
 
-                    <CheckBox x:Name="BeepOnUpdateCheckBox" Content="Beep on data update" Margin="0,5,0,10" AutomationProperties.Name="Enable or disable sound notification on data refresh"/>
+                    <Label Content="Reserved API Calls for Auto-Refresh (0-10):" Target="{Binding ElementName=ReservedApiCallCountTextBox}"
+                           Foreground="{DynamicResource AppForegroundBrush}"/>
+                    <TextBox x:Name="ReservedApiCallCountTextBox" Margin="0,0,0,10" Width="50" HorizontalAlignment="Left"
+                             AutomationProperties.Name="Number of API calls reserved for automatic refreshes, range 0 to 10"
+                             TextChanged="ReservedApiCallCountTextBox_TextChanged" 
+                             LostFocus="TextBox_Lost_Focus_NumericValidation" Background="{DynamicResource ListBoxBackgroundBrush}"
+                             Foreground="{DynamicResource ListBoxItemForegroundBrush}"/>
+
+                    <Label Content="Font Size Adjustment (-5 to +10):" Target="{Binding ElementName=FontSizeAdjustmentTextBox}"
+                           Foreground="{DynamicResource AppForegroundBrush}"/>
+                    <TextBox x:Name="FontSizeAdjustmentTextBox" Margin="0,0,0,10" Width="50" HorizontalAlignment="Left"
+                             AutomationProperties.Name="Adjust overall font size, range -5 to +10"
+                             TextChanged="FontSizeAdjustmentTextBox_TextChanged" 
+                             LostFocus="TextBox_Lost_Focus_NumericValidation" Background="{DynamicResource ListBoxBackgroundBrush}"
+                             Foreground="{DynamicResource ListBoxItemForegroundBrush}"/>
+
+                    <CheckBox x:Name="BeepOnUpdateCheckBox" Content="Beep on data update" Margin="0,5,0,10" 
+                              AutomationProperties.Name="Enable or disable sound notification on data refresh"
+                              Checked="BeepOnUpdateCheckBox_Changed" 
+                              Unchecked="BeepOnUpdateCheckBox_Changed"
+                              Foreground="{DynamicResource AppForegroundBrush}"/>
+                    
+                    <Border BorderThickness="1" BorderBrush="{DynamicResource AppForegroundBrush}" Margin="0,20,0,0" Padding="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="LastUpdatedTextBlock" Text="Last updated: Never" Margin="0,0,10,0" 
+                                       AutomationProperties.Name="Data last updated time"
+                                       Foreground="{DynamicResource AppForegroundBrush}"/>
+                            <TextBlock x:Name="DataStatusTextBlock" Text="Status: Idle" 
+                                       AutomationProperties.Name="Current data status"
+                                       Foreground="{DynamicResource AppForegroundBrush}"/>
+                        </StackPanel>
+                    </Border>
                 </StackPanel>
             </TabItem>
         </TabControl>

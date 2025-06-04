@@ -2,8 +2,16 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:AccessibleCryptoViewer"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib" 
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/LightTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <sys:Double x:Key="AppBaseFontSize">12.0</sys:Double>
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

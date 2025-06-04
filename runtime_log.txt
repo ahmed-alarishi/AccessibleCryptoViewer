@@ -1,0 +1,15 @@
+[2025-06-03 13:58:45] CoinGecko API Request Error: Forbidden - Response status code does not indicate success: 403 (Forbidden).
+[2025-06-03 13:58:52] CoinGecko API Request Error: Forbidden - Response status code does not indicate success: 403 (Forbidden).
+[2025-06-03 13:59:51] CoinGecko API Request Error: Forbidden - Response status code does not indicate success: 403 (Forbidden).
+[2025-06-03 15:02:29] Debug: LoadAndSetInitialSettings called.
+[2025-06-03 15:02:29] Debug: Window_Loaded event fired
+[2025-06-03 15:02:29] Debug: LoadWatchlistDataAsync started.
+[2025-06-03 15:02:30] Debug: Watchlist loaded with 6 items.
+[2025-06-03 15:02:53] Theme changed to: Dark
+[2025-06-03 15:02:56] Refresh rate changed to: 300s
+[2025-06-03 15:02:57] Refresh rate changed to: 60s
+[2025-06-03 15:02:57] Refresh rate changed to: 30s
+[2025-06-03 15:02:58] Refresh rate changed to: 20s
+[2025-06-03 15:02:58] Refresh rate changed to: 30s
+[2025-06-03 15:02:59] Refresh rate changed to: 60s
+[2025-06-03 15:02:59] Refresh rate changed to: 30s

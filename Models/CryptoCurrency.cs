@@ -1,15 +1,15 @@
-// In a new file: Models/CryptoCurrency.cs
+// In Models/CryptoCurrency.cs
 using System;
 using System.ComponentModel; // Required for INotifyPropertyChanged
 
 namespace AccessibleCryptoViewer.Models // Ensure this namespace matches your project
 {
-    public class CryptoCurrency : INotifyPropertyChanged // Implement INotifyPropertyChanged for UI updates
+    public class CryptoCurrency : INotifyPropertyChanged
     {
         // Backing fields for properties
         private string _id;
         private string _name;
-        private string _symbol;
+        private string? _symbol; // << CHANGED TO NULLABLE STRING
         private decimal? _priceUsd;
         private double? _priceChangePercentage24h;
         private decimal? _volume24hUsd;
@@ -27,9 +27,6 @@ namespace AccessibleCryptoViewer.Models // Ensure this namespace matches your pr
         private DateTime _lastUpdated;
         private string _dataSourceApi;
 
-        // Public properties with getters and setters
-        // When a property changes, we'll raise the PropertyChanged event
-
         public string Id
         {
             get => _id;
@@ -42,7 +39,7 @@ namespace AccessibleCryptoViewer.Models // Ensure this namespace matches your pr
             set { if (_name != value) { _name = value; OnPropertyChanged(nameof(Name)); } }
         }
 
-        public string Symbol
+        public string? Symbol // << CHANGED TO NULLABLE STRING
         {
             get => _symbol;
             set { if (_symbol != value) { _symbol = value; OnPropertyChanged(nameof(Symbol)); } }
@@ -138,27 +135,23 @@ namespace AccessibleCryptoViewer.Models // Ensure this namespace matches your pr
             set { if (_lastUpdated != value) { _lastUpdated = value; OnPropertyChanged(nameof(LastUpdated)); } }
         }
 
-        public string DataSourceApi // e.g., "CoinGecko", "DexScreener"
+        public string DataSourceApi 
         {
             get => _dataSourceApi;
             set { if (_dataSourceApi != value) { _dataSourceApi = value; OnPropertyChanged(nameof(DataSourceApi)); } }
         }
 
-
-        // INotifyPropertyChanged implementation
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        // Constructor (optional, but can be useful)
         public CryptoCurrency()
         {
-            // Initialize default values if necessary
             _id = string.Empty;
             _name = string.Empty;
-            _symbol = string.Empty;
+            _symbol = null; // << CAN BE INITIALIZED TO NULL FOR NULLABLE STRING
             _description = string.Empty;
             _homepageUrl = string.Empty;
             _blockchainExplorerUrl = string.Empty;
@@ -166,7 +159,7 @@ namespace AccessibleCryptoViewer.Models // Ensure this namespace matches your pr
             _chain = string.Empty;
             _contractAddress = string.Empty;
             _dataSourceApi = string.Empty;
-            LastUpdated = DateTime.UtcNow; // Default to now
+            LastUpdated = DateTime.UtcNow;
         }
     }
 }
